@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object SpacexApiService {
-    private val BASE_URL = "https://api.spacexdata.com"
+    private const val BASE_URL = "https://api.spacexdata.com"
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
