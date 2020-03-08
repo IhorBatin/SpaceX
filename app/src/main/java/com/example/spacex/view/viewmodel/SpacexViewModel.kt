@@ -3,8 +3,9 @@ package com.example.spacex.view.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import network.SpacexApiService
-import repository.SpacexRepository
+import com.example.spacex.view.network.SpacexApiService
+import com.example.spacex.view.repository.SpacexRepository
+import com.example.spacex.view.utils.LaunchResponse
 
 
 class SpacexViewModel : ViewModel() {
@@ -19,6 +20,8 @@ class SpacexViewModel : ViewModel() {
             log("Error: response is empty")
         } else {
             log("Success: We have response of ${responseList.size} objects from SpaceX API")
+
+            //printAll(spacexRepo.getPastLaunches())
         }
 
         //Here we want to send list of LaunchResponse objects to the view
@@ -29,4 +32,12 @@ class SpacexViewModel : ViewModel() {
     fun log(string: String){
         println("debugger: $string")
     }
+
+    fun printAll(list: List<LaunchResponse>){
+        log("printing ${list.size} elements ...")
+        for (element in list) {
+            log("ID: ${element.details}")
+        }
+    }
+
 }

@@ -1,7 +1,7 @@
-package network
+package com.example.spacex.view.network
 
+import com.example.spacex.view.utils.LaunchResponse
 import retrofit2.http.GET
-import utils.LaunchResponse
 
 interface SpacexApiInterface {
     @GET("/v3/launches/past")

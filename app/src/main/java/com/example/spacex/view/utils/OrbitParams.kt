@@ -1,4 +1,4 @@
-package utils
+package com.example.spacex.view.utils
 
 
 import com.squareup.moshi.Json

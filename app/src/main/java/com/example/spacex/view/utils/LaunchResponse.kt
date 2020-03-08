@@ -1,4 +1,5 @@
-package utils
+package com.example.spacex.view.utils
+
 
 import com.squareup.moshi.Json
 
@@ -20,7 +21,7 @@ data class LaunchResponse(
 	val launchFailureDetails: LaunchFailureDetails? = null,
 
 	@Json(name="flight_number")
-	val flightNumber: Int? = null,
+	val flightNumber: Int = 0,
 
 	@Json(name="is_tentative")
 	val isTentative: Boolean? = null,

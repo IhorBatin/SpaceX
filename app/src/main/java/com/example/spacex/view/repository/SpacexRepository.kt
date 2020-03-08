@@ -1,6 +1,6 @@
-package repository
+package com.example.spacex.view.repository
 
-import network.SpacexApiInterface
+import com.example.spacex.view.network.SpacexApiInterface
 
 class SpacexRepository(private val apiInterface: SpacexApiInterface) {
     suspend fun getPastLaunches() = apiInterface.fetchPastLaunches()
