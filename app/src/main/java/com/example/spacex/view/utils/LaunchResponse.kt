@@ -1,79 +1,35 @@
 package com.example.spacex.view.utils
 
-
-import com.squareup.moshi.Json
-
 data class LaunchResponse(
-
-	@Json(name="mission_name")
-	val missionName: String? = null,
-
-	@Json(name="static_fire_date_utc")
-	val staticFireDateUtc: String? = null,
-
-	@Json(name="launch_year")
-	val launchYear: String? = null,
-
-	@Json(name="launch_date_utc")
-	val launchDateUtc: String? = null,
-
-	@Json(name="launch_failure_details")
-	val launchFailureDetails: LaunchFailureDetails? = null,
-
-	@Json(name="flight_number")
-	val flightNumber: Int = 0,
-
-	@Json(name="is_tentative")
-	val isTentative: Boolean? = null,
-
-	@Json(name="rocket")
-	val rocket: Rocket? = null,
-
-	@Json(name="mission_id")
-	val missionId: List<Any?>? = null,
-
-	@Json(name="launch_window")
-	val launchWindow: Int? = null,
-
-	@Json(name="crew")
-	val crew: Any? = null,
-
-	@Json(name="launch_date_local")
-	val launchDateLocal: String? = null,
-
-	@Json(name="tentative_max_precision")
-	val tentativeMaxPrecision: String? = null,
-
-	@Json(name="ships")
-	val ships: List<Any?>? = null,
-
-	@Json(name="launch_date_unix")
-	val launchDateUnix: Int? = null,
-
-	@Json(name="launch_success")
-	val launchSuccess: Boolean? = null,
-
-	@Json(name="static_fire_date_unix")
-	val staticFireDateUnix: Int? = null,
-
-	@Json(name="tbd")
-	val tbd: Boolean? = null,
-
-	@Json(name="timeline")
-	val timeline: Timeline? = null,
-
-	@Json(name="telemetry")
-	val telemetry: Telemetry? = null,
-
-	@Json(name="links")
-	val links: Links? = null,
-
-	@Json(name="details")
-	val details: String? = null,
-
-	@Json(name="launch_site")
-	val launchSite: LaunchSite? = null,
-
-	@Json(name="upcoming")
-	val upcoming: Boolean? = null
+    val crew: Any,
+    val details: String,
+    val flight_number: Int,
+    val is_tentative: Boolean,
+    val last_date_update: String,
+    val last_ll_launch_date: String,
+    val last_ll_update: String,
+    val last_wiki_launch_date: String,
+    val last_wiki_revision: String,
+    val last_wiki_update: String,
+    val launch_date_local: String,
+    val launch_date_source: String,
+    val launch_date_unix: Int,
+    val launch_date_utc: String,
+    val launch_failure_details: LaunchFailureDetails,
+    val launch_site: LaunchSite,
+    val launch_success: Boolean,
+    val launch_window: Int?,
+    val launch_year: String,
+    val links: Links,
+    val mission_id: List<String>,
+    val mission_name: String,
+    val rocket: Rocket,
+    val ships: List<Any>,
+    val static_fire_date_unix: Int?,
+    val static_fire_date_utc: String?,
+    val tbd: Boolean,
+    val telemetry: Telemetry,
+    val tentative_max_precision: String,
+    val timeline: Timeline,
+    val upcoming: Boolean
 )

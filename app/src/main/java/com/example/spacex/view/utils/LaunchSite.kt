@@ -1,17 +1,7 @@
 package com.example.spacex.view.utils
 
-
-import com.squareup.moshi.Json
-
-
 data class LaunchSite(
-
-	@Json(name="site_name")
-	val siteName: String? = null,
-
-	@Json(name="site_id")
-	val siteId: String? = null,
-
-	@Json(name="site_name_long")
-	val siteNameLong: String? = null
+    val site_id: String,
+    val site_name: String,
+    val site_name_long: String
 )

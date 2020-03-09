@@ -1,26 +1,10 @@
 package com.example.spacex.view.utils
 
-
-import com.squareup.moshi.Json
-
-
 data class Rocket(
-
-	@Json(name="second_stage")
-	val secondStage: SecondStage? = null,
-
-	@Json(name="rocket_id")
-	val rocketId: String? = null,
-
-	@Json(name="first_stage")
-	val firstStage: FirstStage? = null,
-
-	@Json(name="rocket_type")
-	val rocketType: String? = null,
-
-	@Json(name="rocket_name")
-	val rocketName: String? = null,
-
-	@Json(name="fairings")
-	val fairings: Fairings? = null
+    val fairings: Any,
+    val first_stage: FirstStage,
+    val rocket_id: String,
+    val rocket_name: String,
+    val rocket_type: String,
+    val second_stage: SecondStage
 )

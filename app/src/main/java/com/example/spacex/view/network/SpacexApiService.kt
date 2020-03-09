@@ -10,7 +10,6 @@ object SpacexApiService {
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 
     val spacexAPI: SpacexApiInterface = retrofit.create(SpacexApiInterface::class.java)

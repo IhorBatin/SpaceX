@@ -7,21 +7,20 @@ import com.example.spacex.view.network.SpacexApiService
 import com.example.spacex.view.repository.SpacexRepository
 import com.example.spacex.view.utils.LaunchResponse
 
-
 class SpacexViewModel : ViewModel() {
     private val spacexRepo: SpacexRepository = SpacexRepository(SpacexApiService.spacexAPI)
 
     val spacexLiveData = liveData(Dispatchers.IO) {
         log("Starting SpacexViwModel")
 
-        val responseList = spacexRepo.getPastLaunches()
+        // getting list of responses and saving it in reversed order: newest to oldest
+        val responseList = spacexRepo.getPastLaunches().reversed()
 
         if(responseList.isEmpty()){
             log("Error: response is empty")
         } else {
             log("Success: We have response of ${responseList.size} objects from SpaceX API")
-
-            //printAll(spacexRepo.getPastLaunches())
+            printAllMissions(spacexRepo.getPastLaunches())
         }
 
         //Here we want to send list of LaunchResponse objects to the view
@@ -29,15 +28,15 @@ class SpacexViewModel : ViewModel() {
     }
 
     // Function For Logging to console
-    fun log(string: String){
+    private fun log(string: String){
         println("debugger: $string")
     }
 
-    fun printAll(list: List<LaunchResponse>){
-        log("printing ${list.size} elements ...")
+    private fun printAllMissions(list: List<LaunchResponse>){
+        log("\n\n=====================================")
         for (element in list) {
-            log("ID: ${element.details}")
+            log("Mission #${element.flight_number} -> ${element.mission_name}")
         }
+        log("=====================================\n\n")
     }
-
 }
