@@ -32,7 +32,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Mission Name"/>
+                    tools:text="Mission Mame"
+                    android:text="@{launch.mission_name}"/>
 
                 <TextView
                     android:id="@+id/tv_rocket_name"

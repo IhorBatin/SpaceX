@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.spacex.R
-import com.example.spacex.databinding.LaunchItemBinding
 import com.example.spacex.view.adapter.RecyclerViewAdapter
 import com.example.spacex.view.utils.LaunchResponse
 import com.example.spacex.view.viewmodel.SpacexViewModel
@@ -18,19 +18,22 @@ import kotlinx.android.synthetic.main.fragment_main.*
 
 class FragmentMain : Fragment() {
     private val model: SpacexViewModel by lazy { ViewModelProvider(this).get(SpacexViewModel::class.java)}
+    private var launchAdapter: RecyclerViewAdapter? = null
 
     private val itemClicked: (LaunchResponse) -> Unit = {
-        //Toast.makeText(this, it.author, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), it.mission_name, Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
         log("onCreateView()-Start")
         val view = inflater.inflate(R.layout.fragment_main, container, false)
-        var bind: LaunchItemBinding = LaunchItemBinding.bind(view)
-        bind.launch
 
-
+        rv_container.apply {
+            launchAdapter = RecyclerViewAdapter(itemClicked)
+            layoutManager = LinearLayoutManager(requireContext())
+            //itemAnimator = DefaultItemAnimator()
+        }
 
         setupObservers()
 
@@ -40,13 +43,15 @@ class FragmentMain : Fragment() {
 
     private fun setupObservers(){
         log("setupObservers()-Start")
-        model.spacexLiveData.observe(viewLifecycleOwner, Observer {launchList ->
-            //log("launchList size -> ${launchList.size}")
+        model.spacexLiveData.observe(viewLifecycleOwner, Observer {
+            log("launchList size -> ${it.size}")
             //log("Mission Name: ${launchList[10].missionName}")
-            //printAll(launchList)
 
-            rv_container.adapter = RecyclerViewAdapter(itemClicked ,launchList)
-            rv_container.layoutManager = LinearLayoutManager(this.context)
+
+            val adapterItemCount = launchAdapter?.itemCount?.minus(1) ?: -1
+            val insertIndex = if (adapterItemCount < 0) 0 else adapterItemCount
+            launchAdapter?.submitList(it)
+            launchAdapter?.notifyItemRangeInserted(insertIndex, it.size)
         })
         log("setupObservers()-End")
     }
