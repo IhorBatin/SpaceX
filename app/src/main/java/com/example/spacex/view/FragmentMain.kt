@@ -21,33 +21,32 @@ class FragmentMain : Fragment() {
     private var launchAdapter: RecyclerViewAdapter? = null
 
     private val itemClicked: (LaunchResponse) -> Unit = {
-        Toast.makeText(requireContext(), it.mission_name, Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Loading... ${it.mission_name}", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
-        log("onCreateView()-Start")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        log("onViewCreated()-Start")
 
         rv_container.apply {
             launchAdapter = RecyclerViewAdapter(itemClicked)
             layoutManager = LinearLayoutManager(requireContext())
-            //itemAnimator = DefaultItemAnimator()
+            adapter = launchAdapter
+            itemAnimator = DefaultItemAnimator()
         }
-
         setupObservers()
-
-        log("onCreateView()-End")
-        return view
+        log("onViewCreated()-End")
     }
 
     private fun setupObservers(){
         log("setupObservers()-Start")
         model.spacexLiveData.observe(viewLifecycleOwner, Observer {
             log("launchList size -> ${it.size}")
-            //log("Mission Name: ${launchList[10].missionName}")
-
-
             val adapterItemCount = launchAdapter?.itemCount?.minus(1) ?: -1
             val insertIndex = if (adapterItemCount < 0) 0 else adapterItemCount
             launchAdapter?.submitList(it)
