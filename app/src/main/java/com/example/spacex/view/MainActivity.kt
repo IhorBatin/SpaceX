@@ -9,7 +9,6 @@ import com.example.spacex.R
 import com.example.spacex.view.viewmodel.SpacexViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-// TODO: Make possibe coming back frm info fragment
 // TODO: Create layouts for phone for now
 
 class MainActivity : AppCompatActivity() {

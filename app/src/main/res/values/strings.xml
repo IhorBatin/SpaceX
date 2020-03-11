@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">SpaceX</string>
+    <string name="app_name">SpaceX Missions Info</string>
     <string name="mission_name">%s</string>
     <string name="rocket_name">Rocket: %s</string>
+    <string name="rocket_used">Rocket %s</string>
+    <string name="rocket_type">Type %s</string>
+    <string name="launch_site">Launch Site %s</string>
+    <string name="date_and_launch_site">From %1s on %2s</string>
 </resources>

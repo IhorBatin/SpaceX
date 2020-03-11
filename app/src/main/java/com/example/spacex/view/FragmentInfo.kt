@@ -5,6 +5,7 @@ import android.telecom.Call
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.spacex.R
@@ -31,6 +32,12 @@ class FragmentInfo : Fragment() {
         log("onCreateView()-End")
         return binding.root
     }
+
+/*
+    fun TextView.showDate(date: String?){
+        this.text  = "Some Random Date ..."
+    }
+*/
 
     fun log(string: String){
         println("debugger FragmentInfo: $string")

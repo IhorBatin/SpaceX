@@ -10,19 +10,107 @@
             type="com.example.spacex.view.utils.LaunchResponse" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cyan">
+        android:background="@color/black">
 
-        <TextView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@{launchDetails.mission_name}" />
+            android:layout_height="wrap_content"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp">
 
+            <ImageView
+                android:id="@+id/iv_mission_patch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:background="@drawable/ic_rocket"
+                loadImg="@{launchDetails.links.mission_patch}"/>
 
+            <TextView
+                android:id="@+id/tv_m_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_mission_patch"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:textColor="@color/white"
+                tools:text="Mission Name"
+                android:text="@{launchDetails.mission_name}" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_m_rocket"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_m_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                tools:text="Rocket Used"
+                android:text="@{String.format(@string/rocket_used, launchDetails.rocket.rocket_name)}" />
+
+            <TextView
+                android:id="@+id/tv_m_rocket_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_m_rocket"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:textColor="@color/white"
+                tools:text="Rocket Type Used"
+                android:text="@{String.format(@string/rocket_type, launchDetails.rocket.rocket_type)}" />
+
+            <TextView
+                android:id="@+id/tv_m_site"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_m_rocket_type"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                tools:text="Launched From Site ..."
+                android:text="@{String.format(@string/launch_site, launchDetails.launch_site.site_name_long)}" />
+
+            <TextView
+                android:id="@+id/tv_m_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_m_site"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                showDate="jjj" />
+
+            <TextView
+                android:id="@+id/tv_m_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_m_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="start"
+                android:paddingTop="4dp"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                tools:text="Mission Details ..."
+                android:text="@{launchDetails.details}" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

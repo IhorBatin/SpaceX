@@ -13,13 +13,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@color/gray">
+            android:background="@drawable/border_shape">
 
                 <ImageView
                     android:id="@+id/iv_mission_patch"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:padding="3dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:padding="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     loadImg="@{launch.links.mission_patch_small}" />
@@ -32,6 +32,12 @@
                     app:layout_constraintStart_toEndOf="@id/iv_mission_patch"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/tv_rocket_name"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="start"
+                    android:textColor="@color/white"
+                    android:paddingEnd="8dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
                     tools:text="Mission Mame"
                     android:text="@{String.format(@string/mission_name, launch.mission_name)}"/>
 
@@ -43,9 +49,28 @@
                     android:gravity="start"
                     app:layout_constraintStart_toEndOf="@id/iv_mission_patch"
                     app:layout_constraintTop_toBottomOf="@id/tv_mission_name"
-                    app:layout_constraintBottom_toBottomOf="@id/iv_mission_patch"
+                    android:paddingTop="4dp"
+                    android:paddingEnd="8dp"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
                     tools:text="Rocket Name"
                     android:text="@{String.format(@string/rocket_name, launch.rocket.rocket_name)}"/>
+
+                <TextView
+                    android:id="@+id/tv_date_and_launchpad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_mission_patch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="start"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="8dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    tools:text="Launched on 200X from Launchpad"
+                    android:text="@{String.format(@string/date_and_launch_site, launch.launch_site.site_name, launch.launch_year)}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
