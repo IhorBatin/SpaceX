@@ -1,5 +1,7 @@
 package com.example.spacex.view.utils
 
+import java.io.Serializable
+
 data class LaunchResponse(
     val crew: Any,
     val details: String,
@@ -32,4 +34,4 @@ data class LaunchResponse(
     val tentative_max_precision: String,
     val timeline: Timeline,
     val upcoming: Boolean
-)
+) : Serializable

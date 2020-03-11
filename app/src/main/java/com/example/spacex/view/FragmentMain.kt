@@ -25,12 +25,10 @@ class FragmentMain : Fragment() {
     private var launchAdapter: RecyclerViewAdapter? = null
     private val itemClicked: (LaunchResponse) -> Unit = {
         //Toast.makeText(requireContext(), "Loading... ${it.mission_name}", Toast.LENGTH_SHORT).show()
-        //activity?.findNavController(R.layout.activity_main)?.navigate(R.id.action_fragmentMain_to_fragmentInfo)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_main, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
