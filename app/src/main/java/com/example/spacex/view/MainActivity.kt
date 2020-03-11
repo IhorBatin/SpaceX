@@ -10,9 +10,7 @@ import com.example.spacex.view.viewmodel.SpacexViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 // TODO: Create navigation component
-// TODO: Create UI with Clickable Recycler View
 // TODO: Create layouts for phone for now
-
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +18,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         log("MainActivity onCreate()")
     }
+
     fun log(string: String){
-        println("debugger FragmentMain: $string")
+        println("debugger: $string")
     }
 }

@@ -1,6 +1,8 @@
 package com.example.spacex.view.adapter
 
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import com.example.spacex.R
@@ -28,7 +30,14 @@ class RecyclerViewAdapter(
         }
         with(binding.root) {
             tag = item
-            setOnClickListener { itemClicked.invoke(item) }
+            setOnClickListener {
+                itemClicked.invoke(item)
+                // Take action here when one of the items is clicked, open detailed info fragment and pass
+                // clicked LaunchResponse Object to the the fragment
+                Toast.makeText(context, "Loading... ${item.mission_name}", Toast.LENGTH_SHORT).show()
+                //TODO: Open New Fragment
+                
+            }
         }
     }
 

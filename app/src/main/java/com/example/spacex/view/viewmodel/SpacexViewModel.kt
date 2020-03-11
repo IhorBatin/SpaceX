@@ -20,7 +20,7 @@ class SpacexViewModel : ViewModel() {
             log("Error: response is empty")
         } else {
             log("Success: We have response of ${responseList.size} objects from SpaceX API")
-            printAllMissions(spacexRepo.getPastLaunches())
+            //printAllMissions(spacexRepo.getPastLaunches())
         }
 
         //Here we want to send list of LaunchResponse objects to the view

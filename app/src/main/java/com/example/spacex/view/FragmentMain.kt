@@ -8,6 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.spacex.R
@@ -19,9 +23,9 @@ import kotlinx.android.synthetic.main.fragment_main.*
 class FragmentMain : Fragment() {
     private val model: SpacexViewModel by lazy { ViewModelProvider(this).get(SpacexViewModel::class.java)}
     private var launchAdapter: RecyclerViewAdapter? = null
-
     private val itemClicked: (LaunchResponse) -> Unit = {
-        Toast.makeText(requireContext(), "Loading... ${it.mission_name}", Toast.LENGTH_SHORT).show()
+        //Toast.makeText(requireContext(), "Loading... ${it.mission_name}", Toast.LENGTH_SHORT).show()
+        //activity?.findNavController(R.layout.activity_main)?.navigate(R.id.action_fragmentMain_to_fragmentInfo)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

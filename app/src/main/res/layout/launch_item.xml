@@ -15,45 +15,37 @@
             android:layout_margin="8dp"
             android:background="@color/gray">
 
-                <TextView
-                    android:id="@+id/tv_test"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                <ImageView
+                    android:id="@+id/iv_mission_patch"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:padding="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:text="@{launch.launch_year}"
-                    />
+                    loadImg="@{launch.links.mission_patch_small}" />
 
                 <TextView
                     android:id="@+id/tv_mission_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/iv_mission_patch"
                     app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/tv_rocket_name"
                     tools:text="Mission Mame"
-                    android:text="@{launch.mission_name}"/>
+                    android:text="@{String.format(@string/mission_name, launch.mission_name)}"/>
 
                 <TextView
                     android:id="@+id/tv_rocket_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="start"
+                    app:layout_constraintStart_toEndOf="@id/iv_mission_patch"
                     app:layout_constraintTop_toBottomOf="@id/tv_mission_name"
-                    tools:text="Rocket Name"/>
+                    app:layout_constraintBottom_toBottomOf="@id/iv_mission_patch"
+                    tools:text="Rocket Name"
+                    android:text="@{String.format(@string/rocket_name, launch.rocket.rocket_name)}"/>
 
-                <TextView
-                    android:id="@+id/tv_launch_year"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_rocket_name"
-                    tools:text="Launch Year"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
