@@ -1,5 +1,6 @@
 package com.example.spacex.view.ext
 
+import android.graphics.Color
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
@@ -10,9 +11,3 @@ fun ImageView.loadImg(imageUrl: String?){
     //TODO: Switch to Coil Library
     return Picasso.get().load(imageUrl).into(this)
 }
-
-@BindingAdapter("showDate")
-fun showDate(view: TextView, date: String){
-    view.text  = "Some Random Date ...$date"
-}
-//TODO: FIX THE DATE NOT SHOWING ISSUE !!!!!!!

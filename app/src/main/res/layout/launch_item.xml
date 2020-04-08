@@ -12,7 +12,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="6dp"
             android:background="@drawable/border_shape">
 
                 <ImageView
@@ -22,6 +22,7 @@
                     android:padding="5dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:background="@drawable/ic_rocket"
                     loadImg="@{launch.links.mission_patch_small}" />
 
                 <TextView

@@ -20,13 +20,13 @@ class FragmentInfo : Fragment() {
                               savedInstanceState: Bundle?): View? {
         log("onCreateView()-Start")
 
+
         // Getting Data from MainFragment through Bundle()
         val launch: LaunchResponse = arguments?.getSerializable("launchDetails") as LaunchResponse
         log(launch.mission_name)
 
         // Binding data to fragment_info fragment, allowing it to return back to previous Frag on back button press
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_info,
-                container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_info, container, false)
         binding.launchDetails = launch
 
         log("onCreateView()-End")

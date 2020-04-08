@@ -27,7 +27,8 @@ class FragmentMain : Fragment() {
         //Toast.makeText(requireContext(), "Loading... ${it.mission_name}", Toast.LENGTH_SHORT).show()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+            inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
 
