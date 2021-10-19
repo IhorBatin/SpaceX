@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_master_detail"
+    app:startDestination="@id/detailFragment2">
+
+    <fragment
+        android:id="@+id/detailFragment2"
+        android:name="com.example.spacex.view.DetailFragment"
+        android:label="DetailFragment">
+        <argument
+            android:name="details"
+            android:defaultValue="@null"
+            app:argType="com.example.spacex.model.LaunchItem"/>
+    </fragment>
+</navigation>
