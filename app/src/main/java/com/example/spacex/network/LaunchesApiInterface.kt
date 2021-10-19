@@ -1,10 +1,10 @@
 package com.example.spacex.network
 
-import com.example.spacex.model.LaunchResponse
+import com.example.spacex.model.LaunchItem
 import retrofit2.http.GET
 
 interface LaunchesApiInterface {
 
-    @GET("/v3/launches")
-    suspend fun getPastLaunches() : LaunchResponse
+    @GET("/v3/launches/past")
+    suspend fun getPastLaunches() : List<LaunchItem>
 }

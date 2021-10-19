@@ -1,14 +1,19 @@
 package com.example.spacex.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
+@JsonClass(generateAdapter = true)
 data class CoresItem(
 
 	@Json(name="flight")
 	val flight: Int? = null,
 
 	@Json(name="landing_type")
-	val landingType: Any? = null,
+	val landingType: String? = null,
 
 	@Json(name="gridfins")
 	val gridfins: Boolean? = null,
@@ -20,17 +25,17 @@ data class CoresItem(
 	val legs: Boolean? = null,
 
 	@Json(name="land_success")
-	val landSuccess: Any? = null,
+	val landSuccess: Boolean? = null,
 
 	@Json(name="landing_vehicle")
-	val landingVehicle: Any? = null,
+	val landingVehicle: String? = null,
 
 	@Json(name="block")
-	val block: Any? = null,
+	val block: Int? = null,
 
 	@Json(name="reused")
 	val reused: Boolean? = null,
 
 	@Json(name="core_serial")
 	val coreSerial: String? = null
-)
+) : Parcelable

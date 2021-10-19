@@ -1,7 +1,12 @@
 package com.example.spacex.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
+@JsonClass(generateAdapter = true)
 data class Fairings(
 
 	@Json(name="recovered")
@@ -15,4 +20,4 @@ data class Fairings(
 
 	@Json(name="reused")
 	val reused: Boolean? = null
-)
+) : Parcelable

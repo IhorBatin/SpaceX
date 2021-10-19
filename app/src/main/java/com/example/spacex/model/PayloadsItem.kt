@@ -1,14 +1,19 @@
 package com.example.spacex.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
+@JsonClass(generateAdapter = true)
 data class PayloadsItem(
 
 	@Json(name="payload_type")
 	val payloadType: String? = null,
 
 	@Json(name="payload_mass_kg")
-	val payloadMassKg: Int? = null,
+	val payloadMassKg: Double? = null,
 
 	@Json(name="payload_id")
 	val payloadId: String? = null,
@@ -17,7 +22,7 @@ data class PayloadsItem(
 	val nationality: String? = null,
 
 	@Json(name="norad_id")
-	val noradId: List<Any?>? = null,
+	val noradId: List<Int>? = null,
 
 	@Json(name="customers")
 	val customers: List<String>? = null,
@@ -29,7 +34,7 @@ data class PayloadsItem(
 	val orbitParams: OrbitParams? = null,
 
 	@Json(name="payload_mass_lbs")
-	val payloadMassLbs: Int? = null,
+	val payloadMassLbs: Double? = null,
 
 	@Json(name="reused")
 	val reused: Boolean? = null,
@@ -38,20 +43,20 @@ data class PayloadsItem(
 	val manufacturer: String? = null,
 
 	@Json(name="cargo_manifest")
-	val cargoManifest: Any? = null,
+	val cargoManifest: String? = null,
 
 	@Json(name="cap_serial")
 	val capSerial: String? = null,
 
 	@Json(name="mass_returned_lbs")
-	val massReturnedLbs: Any? = null,
+	val massReturnedLbs: Double? = null,
 
 	@Json(name="flight_time_sec")
 	val flightTimeSec: Int? = null,
 
 	@Json(name="mass_returned_kg")
-	val massReturnedKg: Any? = null,
+	val massReturnedKg: Double? = null,
 
 	@Json(name="uid")
 	val uid: String? = null
-)
+) : Parcelable

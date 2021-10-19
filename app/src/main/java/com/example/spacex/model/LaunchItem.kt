@@ -1,7 +1,12 @@
 package com.example.spacex.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
+@JsonClass(generateAdapter = true)
 data class LaunchItem(
 
 	@Json(name="launch_year")
@@ -23,7 +28,7 @@ data class LaunchItem(
 	val lastWikiLaunchDate: String? = null,
 
 	@Json(name="mission_id")
-	val missionId: List<Any?>? = null,
+	val missionId: List<String>? = null,
 
 	@Json(name="launch_date_source")
 	val launchDateSource: String? = null,
@@ -32,7 +37,7 @@ data class LaunchItem(
 	val lastLlUpdate: String? = null,
 
 	@Json(name="crew")
-	val crew: Any? = null,
+	val crew: List<String>? = null,
 
 	@Json(name="launch_date_local")
 	val launchDateLocal: String? = null,
@@ -74,7 +79,7 @@ data class LaunchItem(
 	val launchWindow: Int? = null,
 
 	@Json(name="ships")
-	val ships: List<Any?>? = null,
+	val ships: List<String>? = null,
 
 	@Json(name="launch_date_unix")
 	val launchDateUnix: Int? = null,
@@ -96,4 +101,4 @@ data class LaunchItem(
 
 	@Json(name="launch_failure_details")
 	val launchFailureDetails: LaunchFailureDetails? = null
-)
+) : Parcelable

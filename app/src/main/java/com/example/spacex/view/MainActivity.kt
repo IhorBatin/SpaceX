@@ -3,6 +3,7 @@ package com.example.spacex.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.spacex.viewmodel.LaunchesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,10 +28,18 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var diTestVar: String  // Field injection: when you inject as a type of field in a class
 
+    val vm: LaunchesViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        println("Viewmodel ${vm.toString()}")
 
         setContent {
+            val launches = vm.pastLaunches.value
+
+            launches.forEach {
+                println("Launch: ${it.missionName}")
+            }
             MessageCard(diTestVar)
         }
     }
