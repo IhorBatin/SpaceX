@@ -37,25 +37,29 @@ android {
     buildFeatures {
         compose true
     }
+    composeOptions {
+        kotlinCompilerVersion "1.5.10"
+    }
 }
 
 dependencies {
+    def compose_version = "1.0.4"
     // Compose UI
-    implementation("androidx.compose.ui:ui:1.0.1")
+    implementation("androidx.compose.ui:ui:1.0.4")
     // Tooling support (Previews, etc.)
-    implementation("androidx.compose.ui:ui-tooling:1.0.1")
+    implementation("androidx.compose.ui:ui-tooling:1.0.4")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
-    implementation("androidx.compose.foundation:foundation:1.0.1")
+    implementation("androidx.compose.foundation:foundation:1.0.4")
     // Material Design
-    implementation("androidx.compose.material:material:1.0.1")
+    implementation("androidx.compose.material:material:1.0.4")
     // Material design icons
-    implementation("androidx.compose.material:material-icons-core:1.0.1")
-    implementation("androidx.compose.material:material-icons-extended:1.0.1")
+    implementation("androidx.compose.material:material-icons-core:1.0.4")
+    implementation("androidx.compose.material:material-icons-extended:1.0.4")
     // Integration with observables
-    implementation("androidx.compose.runtime:runtime-livedata:1.0.1")
-    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.4")
+    implementation("androidx.compose.runtime:runtime-rxjava2:1.0.4")
 
-    implementation 'androidx.activity:activity-compose:1.3.0-alpha02'
+    implementation 'androidx.activity:activity-compose:1.4.0-rc01'
 
     def nav_version = "2.3.5"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")

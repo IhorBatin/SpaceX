@@ -10,7 +10,7 @@ import kotlinx.android.parcel.Parcelize
 data class Links(
 
 	@Json(name="mission_patch_small")
-	val missionPatchSmall: String? = null,
+    var missionPatchSmall: String? = null,
 
 	@Json(name="mission_patch")
 	val missionPatch: String? = null,

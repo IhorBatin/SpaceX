@@ -27,47 +27,8 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var diTestVar: String  // Field injection: when you inject as a type of field in a class
 
-    val vm: LaunchesViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        println("Viewmodel ${vm.toString()}")
     }
-
-    @Preview
-    @Composable
-    fun MessageCard(name: String = "Test") {
-        Card(
-            modifier = Modifier
-                .fillMaxSize()
-                //.border(border = BorderStroke(width = 3.dp, Color.Green))
-                .background(color = Color.Gray)
-                .padding(15.dp),
-            elevation = 8.dp,
-
-        ) {
-            Column(
-                modifier = Modifier
-                    .background(Color.Cyan)
-            ) {
-                Text(
-                    text = name,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-                Text(
-                    text = "text 2",
-                )
-                Text(
-                    text = "text 3",
-                )
-
-            }
-
-
-
-        }
-
-    }
-
 }

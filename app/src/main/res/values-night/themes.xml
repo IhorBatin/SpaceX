@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <drawable name="rocket_default_image">@drawable/ic_rocket</drawable>
+    <color name="text_color">@color/white</color>
+    <color name="card_background_color">#FF000000</color>
+    <color name="card_border_color">#F5DEB3</color>
+    <color name="background_color">#FF000000</color>
 </resources>
