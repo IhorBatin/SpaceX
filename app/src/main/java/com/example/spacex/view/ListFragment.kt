@@ -43,11 +43,15 @@ class ListFragment : Fragment() {
         return ComposeView(requireContext()).apply {
 
             setContent {
-                val launches = viewModel.pastLaunches.value
+                val launches = viewModel.queriedLaunches.value
                 Column(
                     verticalArrangement = Arrangement.spacedBy(0.dp)
                 ) {
-                    TopMenu()
+                    TopMenu(
+                        { viewModel.onPreviousClicked() },
+                        { viewModel.onUpcomingClicked() },
+                        { viewModel.onSortClicked() }
+                    )
                     LazyColumn(
                         modifier = Modifier
                             .background(colorResource(id = R.color.background_color))

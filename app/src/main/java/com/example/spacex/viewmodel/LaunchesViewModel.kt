@@ -14,23 +14,39 @@ import javax.inject.Inject
 class LaunchesViewModel
 @Inject
 constructor(
-    private val testString: String,
     private val repo: SpacexRepository // Constrictor Injection: when injection inside of class declaration itself
 ) : ViewModel() {
 
-    val pastLaunches: MutableState<List<LaunchItem>> = mutableStateOf(listOf())
+    val queriedLaunches: MutableState<List<LaunchItem>> = mutableStateOf(listOf())
 
     init {
         fetchPastLaunches()
-        println("Viewmodel $testString")
-        println("Viewmodel: ${repo}")
     }
 
-    fun fetchPastLaunches() {
+    private fun fetchPastLaunches() {
         viewModelScope.launch {
-            val list = repo.getPstLaunches()
-            pastLaunches.value = list.reversed()
+            val list = repo.getPastLaunches()
+            queriedLaunches.value = list.reversed()
         }
+    }
+
+    private fun fetchUpcomingLaunches() {
+        viewModelScope.launch {
+            val list = repo.getUpcomingLaunches()
+            queriedLaunches.value = list.reversed()
+        }
+    }
+
+    fun onPreviousClicked() {
+        fetchPastLaunches()
+    }
+
+    fun onUpcomingClicked() {
+        fetchUpcomingLaunches()
+    }
+
+    fun onSortClicked() {
+        queriedLaunches.value = queriedLaunches.value.reversed()
     }
 
 }

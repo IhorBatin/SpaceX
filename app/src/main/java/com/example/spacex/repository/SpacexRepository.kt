@@ -4,5 +4,6 @@ import com.example.spacex.network.LaunchesApiInterface
 
 class SpacexRepository(private val apiInterface: LaunchesApiInterface) {
 
-    suspend fun getPstLaunches() = apiInterface.getPastLaunches()
+    suspend fun getPastLaunches() = apiInterface.getPastLaunches()
+    suspend fun getUpcomingLaunches() = apiInterface.getUpcomingLaunches()
 }

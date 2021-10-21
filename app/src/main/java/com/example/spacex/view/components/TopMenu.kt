@@ -19,7 +19,11 @@ import androidx.compose.ui.unit.dp
 import com.example.spacex.R
 
 @Composable
-fun TopMenu() {
+fun TopMenu(
+    onPreviousClicked: () -> Unit,
+    onUpcomingClicked: () -> Unit,
+    onSortClicked: () -> Unit)
+{
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -33,7 +37,7 @@ fun TopMenu() {
                 //.border(BorderStroke(width = 1.dp, Color.Black))
         ) {
             TextButton(
-                onClick = { /*TODO*/ },
+                onClick = { onPreviousClicked() },
                 modifier = Modifier
                     .padding(top = 4.dp, bottom = 4.dp, start = 6.dp, end = 6.dp)
                     .align(Alignment.CenterVertically),
@@ -46,7 +50,7 @@ fun TopMenu() {
                 )
             }
             TextButton(
-                onClick = { /*TODO*/ },
+                onClick = { onUpcomingClicked() },
                 modifier = Modifier
                     .padding(top = 4.dp, bottom = 4.dp, start = 6.dp, end = 6.dp)
                     .align(Alignment.CenterVertically),
@@ -54,13 +58,13 @@ fun TopMenu() {
                 shape = RoundedCornerShape(16.dp),
             ) {
                 Text(
-                    text = "FUTURE",
+                    text = "UPCOMING",
                     color = colorResource(id = R.color.text_color)
                 )
             }
         }
         IconButton(
-            onClick = { /*TODO*/ },
+            onClick = { onSortClicked() },
             modifier = Modifier
                 .padding(top = 4.dp, bottom = 4.dp, start = 4.dp)
                 //.border(BorderStroke(width = 1.dp, Color.Black))
