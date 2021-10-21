@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/igor/Documents/MyAndroidApps/SpaceX/app/src/main/res/drawable/ic_filter_list_black.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/igor/Documents/MyAndroidApps/SpaceX/app/src/main/res/drawable/ic_filter_list_white.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/igor/Documents/MyAndroidApps/SpaceX/app/src/main/res/drawable/ic_rocket.xml" value="0.18518518518518517" />
         <entry key="..\:/Users/igor/Documents/MyAndroidApps/SpaceX/app/src/main/res/drawable/ic_rocket_black.xml" value="0.18518518518518517" />
         <entry key="..\:/Users/igor/Documents/MyAndroidApps/SpaceX/app/src/main/res/layout-w600dp/activity_main.xml" value="0.2" />

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,6 +26,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.spacex.R
 import com.example.spacex.view.components.LaunchInfoCard
+import com.example.spacex.view.components.TopMenu
 import com.example.spacex.viewmodel.LaunchesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,13 +44,17 @@ class ListFragment : Fragment() {
 
             setContent {
                 val launches = viewModel.pastLaunches.value
-
-                LazyColumn(
-                    modifier = Modifier
-                        .background(colorResource(id = R.color.background_color))
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(0.dp)
                 ) {
-                    itemsIndexed(items = launches) { index, launch ->
-                        LaunchInfoCard(launch = launch, onClick = { onClick() })
+                    TopMenu()
+                    LazyColumn(
+                        modifier = Modifier
+                            .background(colorResource(id = R.color.background_color))
+                    ) {
+                        itemsIndexed(items = launches) { index, launch ->
+                            LaunchInfoCard(launch = launch, onClick = { onClick() })
+                        }
                     }
                 }
             }

@@ -30,7 +30,7 @@ fun LaunchInfoCard(
             .fillMaxWidth(),
         elevation = 8.dp,
         shape = RoundedCornerShape(12.dp),
-        border = BorderStroke(3.dp, colorResource(id = R.color.card_border_color)),
+        border = BorderStroke(1.dp, colorResource(id = R.color.card_border_color)),
         backgroundColor = colorResource(id = R.color.card_background_color)
         //onClick = { onClick() } Not working currently
     ) {
