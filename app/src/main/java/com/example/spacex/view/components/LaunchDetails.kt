@@ -3,16 +3,16 @@ package com.example.spacex.view.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.spacex.R
@@ -22,7 +22,10 @@ import com.example.spacex.model.LaunchItem
 import com.example.spacex.util.loadImage
 
 @Composable
-fun LaunchDetailsScreen(launch: LaunchItem?) {
+fun LaunchDetailsScreen(
+    launch: LaunchItem?,
+    linkClicked: (String?) -> Unit
+) {
     Column (
         modifier = Modifier.verticalScroll(rememberScrollState())
     ){
@@ -56,6 +59,7 @@ fun LaunchDetailsScreen(launch: LaunchItem?) {
         DetailsCard(launch)
         RocketStatsCard(launch)
         PayloadStatsCard(launch)
+        MediaCard(launch = launch) { linkClicked(it) }
     }
 }
 
@@ -221,6 +225,82 @@ fun PayloadStatsCard(launch: LaunchItem?) {
                     }
                 }
                 payloadItems++
+            }
+        }
+    }
+}
+
+@Composable
+fun MediaCard(launch: LaunchItem?, linkClicked: (String?) -> Unit){
+    Card(
+        modifier = Modifier
+            .padding(6.dp)
+            .fillMaxWidth(),
+        elevation = 8.dp,
+        backgroundColor = colorResource(id = R.color.card_background_color),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+
+            contentAlignment = Alignment.Center
+        ) {
+            TextButton(
+                onClick = { linkClicked(launch?.links?.videoLink) },
+                modifier = Modifier
+                    .padding(4.dp)
+                    .padding(start = 22.dp)
+                    .align(Alignment.CenterStart)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_television),
+                    contentDescription = "",
+                    tint = colorResource(id = R.color.text_color),
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+                Text(
+                    text = " VIDEO",
+                    color = colorResource(id = R.color.text_color),
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+            }
+            TextButton(
+                onClick = { linkClicked(launch?.links?.pressKit) },
+                modifier = Modifier
+                    .padding(4.dp)
+                    .align(Alignment.Center)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_newspaper),
+                    contentDescription = "",
+                    tint = colorResource(id = R.color.text_color),
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+                Text(
+                    text = " PRESS",
+                    color = colorResource(id = R.color.text_color),
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+            }
+            TextButton(
+                onClick = { linkClicked(launch?.links?.wikipedia)},
+                modifier = Modifier
+                    .padding(4.dp)
+                    .padding(end = 22.dp)
+                    .align(Alignment.CenterEnd)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_wikipedia),
+                    contentDescription = "",
+                    tint = colorResource(id = R.color.text_color),
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+                Text(
+                    text = " WIKI",
+                    color = colorResource(id = R.color.text_color),
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
             }
         }
     }

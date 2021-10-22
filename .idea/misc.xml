@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_rocket.xml" value="0.13703703703703704" />
         <entry key="app/src/main/res/drawable/ic_rocket_black.xml" value="0.24351851851851852" />
+        <entry key="app/src/main/res/drawable/ic_television.xml" value="0.13703703703703704" />
+        <entry key="app/src/main/res/drawable/ic_wikipedia.xml" value="0.13703703703703704" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.18385416666666668" />
       </map>
     </option>

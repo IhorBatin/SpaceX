@@ -43,10 +43,9 @@ class ListFragment : Fragment() {
                     )
                     LazyColumn {
                         items(launches) { launch ->
-                            LaunchInfoCard(
-                                launch = launch,
-                                onClick = { onCardClick(launch) }
-                            )
+                            LaunchInfoCard(launch = launch) {
+                                onCardClick(it)
+                            }
                         }
                     }
                 }
