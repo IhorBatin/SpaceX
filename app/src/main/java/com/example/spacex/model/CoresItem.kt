@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.IgnoredOnParcel
 
 @Parcelize
 @JsonClass(generateAdapter = true)
@@ -40,5 +41,6 @@ data class CoresItem(
 	val coreSerial: String? = null
 ) : Parcelable {
 
+	@IgnoredOnParcel
 	val landStatus: Boolean? = if(landingIntent == true) landSuccess else null
 }

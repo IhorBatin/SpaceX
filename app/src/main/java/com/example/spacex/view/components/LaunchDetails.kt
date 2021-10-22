@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.spacex.R
@@ -56,6 +55,7 @@ fun LaunchDetailsScreen(launch: LaunchItem?) {
         }
         DetailsCard(launch)
         RocketStatsCard(launch)
+        PayloadStatsCard(launch)
     }
 }
 
@@ -176,6 +176,46 @@ fun RocketStatsCard(launch: LaunchItem?) {
                 }
             }
 
+        }
+    }
+}
+
+@Composable
+fun PayloadStatsCard(launch: LaunchItem?) {
+    Card(
+        modifier = Modifier
+            .padding(6.dp)
+            .fillMaxWidth(),
+        elevation = 8.dp,
+        backgroundColor = colorResource(id = R.color.card_background_color)
+    ) {
+        Column {
+            Text(
+                text = "PAYLOAD",
+                color = colorResource(id = R.color.text_color),
+                style = MaterialTheme.typography.h6,
+                modifier = Modifier
+                    .padding(4.dp)
+                    .align(Alignment.CenterHorizontally),
+                textAlign = TextAlign.Center
+            )
+            launch?.rocket?.secondStage?.payloads?.forEach { payload ->
+                Spacer(modifier = Modifier.height(8.dp))
+                CardNameInfoComponent(name = "Payload ID", value = payload.payloadId.toString())
+                CardNameInfoComponent(name = "Manufacturer", value = payload.manufacturer.toString())
+                CardNameInfoComponent(name = "Type", value = payload.payloadType.toString())
+                CardNameInfoComponent(name = "Nationality", value = payload.nationality.toString())
+                CardNameInfoComponent(name = "Mass", value = "${payload.payloadMassKg} kg")
+                CardNameInfoComponent(name = "Orbit", value = payload.orbit.toString())
+                payload.orbitParams?.let { params ->
+                    params.referenceSystem?.let {
+                        CardNameInfoComponent(name = "Reference System", value = it)
+                    }
+                    params.regime?.let {
+                        CardNameInfoComponent(name = "Regime", value = it)
+                    }
+                }
+            }
         }
     }
 }
