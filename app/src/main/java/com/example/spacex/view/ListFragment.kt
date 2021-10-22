@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -24,7 +25,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI.navigateUp
 import com.example.spacex.R
+import com.example.spacex.extentions.isTabletMode
+import com.example.spacex.model.LaunchItem
+import com.example.spacex.util.LAUNCH_INFO
 import com.example.spacex.view.components.LaunchInfoCard
 import com.example.spacex.view.components.TopMenu
 import com.example.spacex.viewmodel.LaunchesViewModel
@@ -34,6 +40,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ListFragment : Fragment() {
 
     val viewModel: LaunchesViewModel by viewModels()
+    private val tabletController by lazy { (activity as MainActivity).tabletController }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,23 +48,20 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {
-
             setContent {
                 val launches = viewModel.queriedLaunches.value
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(0.dp)
-                ) {
+                Column {
                     TopMenu(
                         { viewModel.onPreviousClicked() },
                         { viewModel.onUpcomingClicked() },
                         { viewModel.onSortClicked() }
                     )
-                    LazyColumn(
-                        modifier = Modifier
-                            .background(colorResource(id = R.color.background_color))
-                    ) {
-                        itemsIndexed(items = launches) { index, launch ->
-                            LaunchInfoCard(launch = launch, onClick = { onClick() })
+                    LazyColumn {
+                        items(launches) { launch ->
+                            LaunchInfoCard(
+                                launch = launch,
+                                onClick = { onCardClick(launch) }
+                            )
                         }
                     }
                 }
@@ -65,43 +69,20 @@ class ListFragment : Fragment() {
         }
     }
 
-    fun onClick() {
-        Toast.makeText(requireContext(), "Clicked", Toast.LENGTH_SHORT).show()
+    private fun onCardClick(launch: LaunchItem) {
+        Toast.makeText(requireContext(), "Loading: ${launch.missionName}", Toast.LENGTH_SHORT).show()
+        navigateToDetailScreen(launch)
     }
 
-
-    @Preview
-    @Composable
-    fun MessageCard(name: String = "Test") {
-        Card(
-            modifier = Modifier
-                .fillMaxSize()
-                //.border(border = BorderStroke(width = 3.dp, Color.Green))
-                .background(color = Color.Gray)
-                .padding(15.dp),
-            elevation = 8.dp,
-
-            ) {
-            Column(
-                modifier = Modifier
-                    .background(Color.Cyan)
-            ) {
-                Text(
-                    text = name,
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                )
-                Text(
-                    text = "text 2",
-                )
-                Text(
-                    text = "text 3",
-                )
-
+    private fun navigateToDetailScreen(launch: LaunchItem) {
+        val bundle = Bundle().apply { putParcelable(LAUNCH_INFO, launch) }
+        when (isTabletMode()) {
+            true -> tabletController.apply {
+                navigateUp()
+                navigate(R.id.detailFragment, bundle)
             }
-
-
-
+            false -> findNavController().navigate(R.id.detailFragment, bundle)
         }
-
     }
+
 }

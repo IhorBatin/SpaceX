@@ -1,6 +1,7 @@
 package com.example.spacex.di
 
 import com.example.spacex.network.LaunchesApiInterface
+import com.example.spacex.util.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,7 +19,7 @@ object NetworkModule {
     @Provides
     fun provideSpacexService() : LaunchesApiInterface {
         return Retrofit.Builder()
-            .baseUrl("https://api.spacexdata.com")
+            .baseUrl(BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
             .create(LaunchesApiInterface::class.java)

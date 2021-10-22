@@ -1,7 +1,7 @@
 package com.example.spacex.di
 
 import android.content.Context
-import com.example.spacex.BaseApplication
+import com.example.spacex.view.BaseApplication
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
