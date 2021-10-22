@@ -1,7 +1,9 @@
 package com.example.spacex.view.components
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import android.graphics.drawable.Icon
+import androidx.compose.foundation.*
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -13,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.spacex.R
@@ -24,7 +27,9 @@ import com.example.spacex.util.loadImage
 
 @Composable
 fun LaunchDetailsScreen(launch: LaunchItem?) {
-    Column {
+    Column (
+        modifier = Modifier.verticalScroll(rememberScrollState())
+    ){
         val image = loadImage(
             url = launch?.links?.missionPatch,
             defaultImage = R.drawable.rocket_default_image
@@ -56,15 +61,6 @@ fun LaunchDetailsScreen(launch: LaunchItem?) {
 
     }
 }
-/**
-***In Details Card
-Flight Number
-Date
-Launch Site
-Launch Success
-Details
-
- */
 
 @Composable
 fun DetailsCard(launch: LaunchItem?) {
@@ -85,49 +81,82 @@ fun DetailsCard(launch: LaunchItem?) {
                     .align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center
             )
-            launch?.flightNumber?.let { // Have to use Box in order to use .align() on text children
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp)
-                        //.border(1.dp, Color.Black)
-                    //.padding(start = 4.dp, end = 4.dp)
-                ) {
-                    Text(
-                        text = "Flight No",
-                        color = colorResource(id = R.color.text_color),
-                        modifier = Modifier.align(Alignment.CenterStart)
-                    )
-                    Text(
-                        text = it.toString(),
-                        color = colorResource(id = R.color.text_color),
-                        modifier = Modifier.align(alignment = Alignment.CenterEnd)
-                    )
-                }
+            launch?.flightNumber?.let {
+                CardNameInfoComponent(name = "Flight No", value = it.toString())
             }
             launch?.launchDateUtc.let { date ->
                 val calendar = date?.toCalendar()
-                val dateTex = calendar?.toPrettyText()
+                val dateText = calendar?.toPrettyText()
+                CardNameInfoComponent(name = "Launch Date", value = "$dateText UTC")
+            }
+            launch?.launchSite?.let { site ->
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(4.dp)
-                        //.border(1.dp, Color.Black)
-                        //.padding(start = 4.dp, end = 4.dp)
                 ) {
                     Text(
-                        text = "Launch Date",
+                        text = "Launch Site",
+                        color = colorResource(id = R.color.text_color),
+                        modifier = Modifier.align(Alignment.TopStart)
+                    )
+                    Text(
+                        text = site.siteNameLong.toString(),
+                        color = colorResource(id = R.color.text_color),
+                        modifier = Modifier
+                            .fillMaxWidth(0.70f)
+                            .align(alignment = Alignment.CenterEnd),
+                        textAlign = TextAlign.End
+                    )
+                }
+            }
+            launch?.launchSuccess?.let { successStatus ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(4.dp)
+                ) {
+                    Text(
+                        text = "Launch Success",
                         color = colorResource(id = R.color.text_color),
                         modifier = Modifier.align(Alignment.CenterStart)
                     )
-                    Text(
-                        text = "$dateTex UTC",
-                        color = colorResource(id = R.color.text_color),
-                        modifier = Modifier.align(alignment = Alignment.CenterEnd)
+                    Image(
+                        painter = when(successStatus) {
+                            true -> painterResource(id = R.drawable.ic_success)
+                            else -> painterResource(id = R.drawable.ic_fail)
+                        },
+                        contentDescription = "Launch success icon",
+                        modifier = Modifier.align(Alignment.CenterEnd)
                     )
                 }
+            }
+            launch?.details?.let {
+                Text(
+                    text = it,
+                    color = colorResource(id = R.color.text_color),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp, bottom = 4.dp, start = 4.dp, end = 4.dp),
+                    textAlign = TextAlign.Center
+                )
+            }
+            launch?.launchFailureDetails?.let { failureDetails ->
+                Text(
+                    text = "${failureDetails.reason}. Time: ${failureDetails.time} sec. Altitude: ${failureDetails.altitude} km",
+                    color = colorResource(id = R.color.text_color),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 8.dp, bottom = 4.dp, start = 4.dp, end = 4.dp),
+                    textAlign = TextAlign.Center
+                )
             }
 
         }
     }
+}
+
+@Composable
+fun RocketStatsCard(launch: LaunchItem?) {
+
 }
