@@ -1,9 +1,8 @@
 package com.example.spacex.view.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -14,13 +13,11 @@ import androidx.compose.ui.unit.dp
 import com.example.spacex.R
 
 @Composable
-fun CardNameInfoComponent(name: String, value: String) {
+fun CardKeyAndValueComponent(name: String, value: String) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(4.dp)
-        //.border(1.dp, Color.Black)
-        //.padding(start = 4.dp, end = 4.dp)
     ) {
         Text(
             text = name,
@@ -56,4 +53,21 @@ fun CardCheckStatusComponent(name: String, status: Boolean) {
             modifier = Modifier.align(Alignment.CenterEnd)
         )
     }
+}
+
+@Composable
+fun CustomDivider() {
+    Spacer(modifier = Modifier.height(6.dp))
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(.9f)
+                .height(2.dp)
+                .background(color = colorResource(id = R.color.text_color)),
+        )
+    }
+    Spacer(modifier = Modifier.height(6.dp))
 }

@@ -22,7 +22,6 @@ import com.example.spacex.R
 import com.example.spacex.model.LaunchItem
 import com.example.spacex.util.loadImage
 
-
 @Composable
 fun LaunchInfoCard(
     launch: LaunchItem,

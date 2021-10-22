@@ -79,12 +79,12 @@ fun DetailsCard(launch: LaunchItem?) {
                 textAlign = TextAlign.Center
             )
             launch?.flightNumber?.let {
-                CardNameInfoComponent(name = "Flight No", value = it.toString())
+                CardKeyAndValueComponent(name = "Flight No", value = it.toString())
             }
             launch?.launchDateUtc.let { date ->
                 val calendar = date?.toCalendar()
                 val dateText = calendar?.toPrettyText()
-                CardNameInfoComponent(name = "Launch Date", value = "$dateText UTC")
+                CardKeyAndValueComponent(name = "Launch Date", value = "$dateText UTC")
             }
             launch?.launchSite?.let { site ->
                 Box(
@@ -155,18 +155,20 @@ fun RocketStatsCard(launch: LaunchItem?) {
                 textAlign = TextAlign.Center
             )
             launch?.rocket?.rocketName.let { name ->
-                CardNameInfoComponent(name = "Name", value = name.toString())
+                CardKeyAndValueComponent(name = "Name", value = name.toString())
             }
             launch?.rocket?.rocketType.let { type ->
-                CardNameInfoComponent(name = "Type", value = type.toString())
+                CardKeyAndValueComponent(name = "Type", value = type.toString())
             }
-            launch?.rocket?.firstStage?.cores?.forEach { cores ->
-                Spacer(modifier = Modifier.height(8.dp))
+            launch?.rocket?.firstStage?.cores?.forEachIndexed { index, cores ->
+                if (index > 0) {
+                    CustomDivider()
+                }
                 cores.coreSerial?.let { serial ->
-                    CardNameInfoComponent(name = "Core Serial", value = serial)
+                    CardKeyAndValueComponent(name = "Core Serial", value = serial)
                 }
                 cores.landingType?.let { landType ->
-                    CardNameInfoComponent(name = "Landing Type", value = landType)
+                    CardKeyAndValueComponent(name = "Landing Type", value = landType)
                 }
                 cores.landStatus?.let { landed ->
                     CardCheckStatusComponent(name = "Landing Success", status = landed)
@@ -199,22 +201,26 @@ fun PayloadStatsCard(launch: LaunchItem?) {
                     .align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center
             )
-            launch?.rocket?.secondStage?.payloads?.forEach { payload ->
-                Spacer(modifier = Modifier.height(8.dp))
-                CardNameInfoComponent(name = "Payload ID", value = payload.payloadId.toString())
-                CardNameInfoComponent(name = "Manufacturer", value = payload.manufacturer.toString())
-                CardNameInfoComponent(name = "Type", value = payload.payloadType.toString())
-                CardNameInfoComponent(name = "Nationality", value = payload.nationality.toString())
-                CardNameInfoComponent(name = "Mass", value = "${payload.payloadMassKg} kg")
-                CardNameInfoComponent(name = "Orbit", value = payload.orbit.toString())
+            var payloadItems = 0
+            launch?.rocket?.secondStage?.payloads?.forEachIndexed { index, payload ->
+                if (index > 0) {
+                    CustomDivider()
+                }
+                CardKeyAndValueComponent(name = "Payload ID", value = payload.payloadId.toString())
+                CardKeyAndValueComponent(name = "Manufacturer", value = payload.manufacturer.toString())
+                CardKeyAndValueComponent(name = "Type", value = payload.payloadType.toString())
+                CardKeyAndValueComponent(name = "Nationality", value = payload.nationality.toString())
+                CardKeyAndValueComponent(name = "Mass", value = "${payload.payloadMassKg} kg")
+                CardKeyAndValueComponent(name = "Orbit", value = payload.orbit.toString())
                 payload.orbitParams?.let { params ->
                     params.referenceSystem?.let {
-                        CardNameInfoComponent(name = "Reference System", value = it)
+                        CardKeyAndValueComponent(name = "Reference System", value = it)
                     }
                     params.regime?.let {
-                        CardNameInfoComponent(name = "Regime", value = it)
+                        CardKeyAndValueComponent(name = "Regime", value = it)
                     }
                 }
+                payloadItems++
             }
         }
     }
