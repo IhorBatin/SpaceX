@@ -38,4 +38,7 @@ data class CoresItem(
 
 	@Json(name="core_serial")
 	val coreSerial: String? = null
-) : Parcelable
+) : Parcelable {
+
+	val landStatus: Boolean? = if(landingIntent == true) landSuccess else null
+}

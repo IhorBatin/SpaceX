@@ -1,17 +1,15 @@
 package com.example.spacex.view.components
 
-import android.graphics.drawable.Icon
-import androidx.compose.foundation.*
-import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -23,7 +21,6 @@ import com.example.spacex.extentions.toCalendar
 import com.example.spacex.extentions.toPrettyText
 import com.example.spacex.model.LaunchItem
 import com.example.spacex.util.loadImage
-
 
 @Composable
 fun LaunchDetailsScreen(launch: LaunchItem?) {
@@ -58,7 +55,7 @@ fun LaunchDetailsScreen(launch: LaunchItem?) {
             )
         }
         DetailsCard(launch)
-
+        RocketStatsCard(launch)
     }
 }
 
@@ -111,25 +108,7 @@ fun DetailsCard(launch: LaunchItem?) {
                 }
             }
             launch?.launchSuccess?.let { successStatus ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(4.dp)
-                ) {
-                    Text(
-                        text = "Launch Success",
-                        color = colorResource(id = R.color.text_color),
-                        modifier = Modifier.align(Alignment.CenterStart)
-                    )
-                    Image(
-                        painter = when(successStatus) {
-                            true -> painterResource(id = R.drawable.ic_success)
-                            else -> painterResource(id = R.drawable.ic_fail)
-                        },
-                        contentDescription = "Launch success icon",
-                        modifier = Modifier.align(Alignment.CenterEnd)
-                    )
-                }
+                CardCheckStatusComponent(name = "Launch Success", status = successStatus)
             }
             launch?.details?.let {
                 Text(
@@ -158,5 +137,45 @@ fun DetailsCard(launch: LaunchItem?) {
 
 @Composable
 fun RocketStatsCard(launch: LaunchItem?) {
+    Card(
+        modifier = Modifier
+            .padding(6.dp)
+            .fillMaxWidth(),
+        elevation = 8.dp,
+        backgroundColor = colorResource(id = R.color.card_background_color)
+    ) {
+        Column {
+            Text(
+                text = "ROCKET",
+                color = colorResource(id = R.color.text_color),
+                style = MaterialTheme.typography.h6,
+                modifier = Modifier
+                    .padding(4.dp)
+                    .align(Alignment.CenterHorizontally),
+                textAlign = TextAlign.Center
+            )
+            launch?.rocket?.rocketName.let { name ->
+                CardNameInfoComponent(name = "Name", value = name.toString())
+            }
+            launch?.rocket?.rocketType.let { type ->
+                CardNameInfoComponent(name = "Type", value = type.toString())
+            }
+            launch?.rocket?.firstStage?.cores?.forEach { cores ->
+                Spacer(modifier = Modifier.height(8.dp))
+                cores.coreSerial?.let { serial ->
+                    CardNameInfoComponent(name = "Core Serial", value = serial)
+                }
+                cores.landingType?.let { landType ->
+                    CardNameInfoComponent(name = "Landing Type", value = landType)
+                }
+                cores.landStatus?.let { landed ->
+                    CardCheckStatusComponent(name = "Landing Success", status = landed)
+                }
+                cores.reused?.let { reused ->
+                    CardCheckStatusComponent(name = "Reused", status = reused)
+                }
+            }
 
+        }
+    }
 }
