@@ -25,11 +25,26 @@ import com.example.spacex.util.loadImage
 @Composable
 fun LaunchDetailsScreen(
     launch: LaunchItem?,
+    onCloseClick: () -> Unit,
     linkClicked: (String?) -> Unit
 ) {
     Column (
         modifier = Modifier.verticalScroll(rememberScrollState())
     ){
+        IconButton(
+            onClick = { onCloseClick() },
+            modifier = Modifier
+                .padding(top = 4.dp, bottom = 4.dp, start = 4.dp)
+                //.border(BorderStroke(width = 1.dp, Color.Black))
+                .wrapContentWidth(Alignment.End)
+                //.align(Alignment.CenterVertically),
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_close),
+                contentDescription = stringResource(id = R.string.filter_icon),
+                tint = colorResource(id = R.color.text_color)
+            )
+        }
         val image = loadImage(
             url = launch?.links?.missionPatch,
             defaultImage = R.drawable.rocket_default_image
@@ -86,8 +101,8 @@ fun DetailsCard(launch: LaunchItem?) {
             launch?.flightNumber?.let {
                 CardKeyAndValueComponent(name = stringResource(R.string.flight_no), value = it.toString())
             }
-            launch?.launchDateUtc.let { date ->
-                val calendar = date?.toCalendar()
+            launch?.launchDateUtc?.let { date ->
+                val calendar = date.toCalendar()
                 val dateText = calendar?.toPrettyText()
                 CardKeyAndValueComponent(
                     name = stringResource(R.string.launch_date),
@@ -169,11 +184,11 @@ fun RocketStatsCard(launch: LaunchItem?) {
                     .align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center
             )
-            launch?.rocket?.rocketName.let { name ->
-                CardKeyAndValueComponent(name = stringResource(R.string.rocket_name), value = name.toString())
+            launch?.rocket?.rocketName?.let { name ->
+                CardKeyAndValueComponent(name = stringResource(R.string.rocket_name), value = name)
             }
-            launch?.rocket?.rocketType.let { type ->
-                CardKeyAndValueComponent(name = stringResource(R.string.rocket_type), value = type.toString())
+            launch?.rocket?.rocketType?.let { type ->
+                CardKeyAndValueComponent(name = stringResource(R.string.rocket_type), value = type)
             }
             launch?.rocket?.firstStage?.cores?.forEachIndexed { index, cores ->
                 if (index > 0) {
