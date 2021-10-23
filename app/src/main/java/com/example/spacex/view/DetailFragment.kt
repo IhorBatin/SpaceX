@@ -14,6 +14,7 @@ import com.example.spacex.R
 import com.example.spacex.model.LaunchItem
 import com.example.spacex.util.LAUNCH_INFO
 import com.example.spacex.view.components.LaunchDetailsScreen
+import com.example.spacex.view.components.NoMissionSelectedScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +25,7 @@ class DetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        arguments?.getParcelable<LaunchItem>(LAUNCH_INFO).let { details ->
+        arguments?.getParcelable<LaunchItem>(LAUNCH_INFO)?.let { details ->
             return ComposeView(requireContext()).apply {
                 setContent {
                     LaunchDetailsScreen(details, {onCloseClicked()}) { urlClicked ->
@@ -32,6 +33,9 @@ class DetailFragment : Fragment() {
                     }
                 }
             }
+        }
+        return ComposeView(requireContext()).apply {
+            setContent { NoMissionSelectedScreen() }
         }
     }
 

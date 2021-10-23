@@ -35,4 +35,5 @@
     <string name="filter_icon">Filter Icon</string>
     <string name="link_error">Can\`t open this link</string>
     <string name="loading">Loading: %s</string>
+    <string name="mission_not_selected">Click on any mission to see more information</string>
 </resources>

@@ -23,6 +23,23 @@ import com.example.spacex.model.LaunchItem
 import com.example.spacex.util.loadImage
 
 @Composable
+fun NoMissionSelectedScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(6.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = stringResource(R.string.mission_not_selected),
+            style = MaterialTheme.typography.h4,
+            color = colorResource(R.color.text_color),
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
 fun LaunchDetailsScreen(
     launch: LaunchItem?,
     onCloseClick: () -> Unit,
@@ -30,7 +47,7 @@ fun LaunchDetailsScreen(
 ) {
     Column (
         modifier = Modifier.verticalScroll(rememberScrollState())
-    ){
+    ) {
         IconButton(
             onClick = { onCloseClick() },
             modifier = Modifier
@@ -160,7 +177,6 @@ fun DetailsCard(launch: LaunchItem?) {
                     textAlign = TextAlign.Center
                 )
             }
-
         }
     }
 }
