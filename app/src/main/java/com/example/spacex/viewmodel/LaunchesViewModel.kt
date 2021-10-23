@@ -19,9 +19,7 @@ constructor(
 
     val queriedLaunches: MutableState<List<LaunchItem>> = mutableStateOf(listOf())
 
-    init {
-        fetchPastLaunches()
-    }
+    init { fetchPastLaunches() }
 
     private fun fetchPastLaunches() {
         viewModelScope.launch {
@@ -37,16 +35,11 @@ constructor(
         }
     }
 
-    fun onPreviousClicked() {
-        fetchPastLaunches()
-    }
-
-    fun onUpcomingClicked() {
-        fetchUpcomingLaunches()
-    }
-
     fun onSortClicked() {
         queriedLaunches.value = queriedLaunches.value.reversed()
     }
 
+    fun onPreviousClicked() = fetchPastLaunches()
+
+    fun onUpcomingClicked() = fetchUpcomingLaunches()
 }

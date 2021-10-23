@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.spacex.R
 
@@ -49,7 +50,7 @@ fun CardCheckStatusComponent(name: String, status: Boolean) {
                 true -> painterResource(id = R.drawable.ic_success)
                 else -> painterResource(id = R.drawable.ic_fail)
             },
-            contentDescription = "Success icon",
+            contentDescription = stringResource(R.string.success_icon),
             modifier = Modifier.align(Alignment.CenterEnd)
         )
     }

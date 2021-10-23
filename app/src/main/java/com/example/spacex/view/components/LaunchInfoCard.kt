@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.spacex.R
 import com.example.spacex.model.LaunchItem
@@ -45,7 +46,7 @@ fun LaunchInfoCard(
                 image?.let { img ->
                     Image(
                         bitmap = img.asImageBitmap(),
-                        contentDescription = "Image of a Patch",
+                        contentDescription = stringResource(R.string.patch_image),
                         modifier = Modifier
                             .fillMaxHeight()
                             .width(100.dp)

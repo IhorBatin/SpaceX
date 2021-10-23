@@ -15,8 +15,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.spacex.R
+import java.time.temporal.TemporalAdjusters.previous
 
 @Composable
 fun TopMenu(
@@ -45,7 +47,7 @@ fun TopMenu(
                 shape = RoundedCornerShape(16.dp),
             ) {
                 Text(
-                    text = "PREVIOUS",
+                    text = stringResource(R.string.previous_txt),
                     color = colorResource(id = R.color.text_color)
                 )
             }
@@ -58,7 +60,7 @@ fun TopMenu(
                 shape = RoundedCornerShape(16.dp),
             ) {
                 Text(
-                    text = "UPCOMING",
+                    text = stringResource(R.string.upcoming),
                     color = colorResource(id = R.color.text_color)
                 )
             }
@@ -73,7 +75,7 @@ fun TopMenu(
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.ic_filter_list),
-                contentDescription = "Filter Icon",
+                contentDescription = stringResource(id = R.string.filter_icon),
                 tint = colorResource(id = R.color.text_color)
             )
         }

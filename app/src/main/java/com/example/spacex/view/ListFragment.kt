@@ -24,7 +24,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ListFragment : Fragment() {
 
-    val viewModel: LaunchesViewModel by viewModels()
+    private val viewModel: LaunchesViewModel by viewModels()
     private val tabletController by lazy { (activity as MainActivity).tabletController }
 
     override fun onCreateView(
@@ -54,7 +54,11 @@ class ListFragment : Fragment() {
     }
 
     private fun onCardClick(launch: LaunchItem) {
-        Toast.makeText(requireContext(), "Loading: ${launch.missionName}", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+                requireContext(),
+                getString(R.string.loading, launch.missionName),
+                Toast.LENGTH_SHORT)
+            .show()
         navigateToDetailScreen(launch)
     }
 

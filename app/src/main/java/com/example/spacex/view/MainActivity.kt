@@ -12,8 +12,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var diTestVar: String  // Field injection: when you inject as a type of field in a class
     lateinit var tabletController: NavController
 
     @SuppressLint("InflateParams")
@@ -21,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val mainView = layoutInflater.inflate(R.layout.activity_main, null)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.frag_detail_container) as NavHostFragment
-        val tabletController = navHostFragment.navController
+        tabletController = navHostFragment.navController
         supportActionBar?.hide()
         setContentView(mainView)
     }

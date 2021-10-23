@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.spacex.R
@@ -36,7 +37,7 @@ fun LaunchDetailsScreen(
         image?.let { img ->
             Image(
                 bitmap = img.asImageBitmap(),
-                contentDescription = "Image of a Patch, large",
+                contentDescription = stringResource(R.string.patch_image_large),
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 12.dp, bottom = 4.dp, start = 4.dp, end = 4.dp)
@@ -74,7 +75,7 @@ fun DetailsCard(launch: LaunchItem?) {
     ) {
         Column {
             Text(
-                text = "DETAILS",
+                text = stringResource(R.string.details),
                 color = colorResource(id = R.color.text_color),
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier
@@ -83,12 +84,15 @@ fun DetailsCard(launch: LaunchItem?) {
                 textAlign = TextAlign.Center
             )
             launch?.flightNumber?.let {
-                CardKeyAndValueComponent(name = "Flight No", value = it.toString())
+                CardKeyAndValueComponent(name = stringResource(R.string.flight_no), value = it.toString())
             }
             launch?.launchDateUtc.let { date ->
                 val calendar = date?.toCalendar()
                 val dateText = calendar?.toPrettyText()
-                CardKeyAndValueComponent(name = "Launch Date", value = "$dateText UTC")
+                CardKeyAndValueComponent(
+                    name = stringResource(R.string.launch_date),
+                    value = stringResource(id = R.string.time_utc, dateText.toString())
+                )
             }
             launch?.launchSite?.let { site ->
                 Box(
@@ -97,7 +101,7 @@ fun DetailsCard(launch: LaunchItem?) {
                         .padding(4.dp)
                 ) {
                     Text(
-                        text = "Launch Site",
+                        text = stringResource(R.string.launch_site),
                         color = colorResource(id = R.color.text_color),
                         modifier = Modifier.align(Alignment.TopStart)
                     )
@@ -112,7 +116,10 @@ fun DetailsCard(launch: LaunchItem?) {
                 }
             }
             launch?.launchSuccess?.let { successStatus ->
-                CardCheckStatusComponent(name = "Launch Success", status = successStatus)
+                CardCheckStatusComponent(
+                    name = stringResource(R.string.launch_success),
+                    status = successStatus
+                )
             }
             launch?.details?.let {
                 Text(
@@ -126,7 +133,11 @@ fun DetailsCard(launch: LaunchItem?) {
             }
             launch?.launchFailureDetails?.let { failureDetails ->
                 Text(
-                    text = "${failureDetails.reason}. Time: ${failureDetails.time} sec. Altitude: ${failureDetails.altitude} km",
+                    text = stringResource(R.string.launch_failure_details,
+                        failureDetails.reason.toString(),
+                        failureDetails.time.toString(),
+                        failureDetails.altitude.toString()
+                    ),
                     color = colorResource(id = R.color.text_color),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -150,7 +161,7 @@ fun RocketStatsCard(launch: LaunchItem?) {
     ) {
         Column {
             Text(
-                text = "ROCKET",
+                text = stringResource(R.string.rocket),
                 color = colorResource(id = R.color.text_color),
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier
@@ -159,26 +170,26 @@ fun RocketStatsCard(launch: LaunchItem?) {
                 textAlign = TextAlign.Center
             )
             launch?.rocket?.rocketName.let { name ->
-                CardKeyAndValueComponent(name = "Name", value = name.toString())
+                CardKeyAndValueComponent(name = stringResource(R.string.rocket_name), value = name.toString())
             }
             launch?.rocket?.rocketType.let { type ->
-                CardKeyAndValueComponent(name = "Type", value = type.toString())
+                CardKeyAndValueComponent(name = stringResource(R.string.rocket_type), value = type.toString())
             }
             launch?.rocket?.firstStage?.cores?.forEachIndexed { index, cores ->
                 if (index > 0) {
                     CustomDivider()
                 }
                 cores.coreSerial?.let { serial ->
-                    CardKeyAndValueComponent(name = "Core Serial", value = serial)
+                    CardKeyAndValueComponent(name = stringResource(R.string.core_serial), value = serial)
                 }
                 cores.landingType?.let { landType ->
-                    CardKeyAndValueComponent(name = "Landing Type", value = landType)
+                    CardKeyAndValueComponent(name = stringResource(R.string.landing_type), value = landType)
                 }
                 cores.landStatus?.let { landed ->
-                    CardCheckStatusComponent(name = "Landing Success", status = landed)
+                    CardCheckStatusComponent(name = stringResource(R.string.landing_success), status = landed)
                 }
                 cores.reused?.let { reused ->
-                    CardCheckStatusComponent(name = "Reused", status = reused)
+                    CardCheckStatusComponent(name = stringResource(R.string.reused), status = reused)
                 }
             }
 
@@ -197,7 +208,7 @@ fun PayloadStatsCard(launch: LaunchItem?) {
     ) {
         Column {
             Text(
-                text = "PAYLOAD",
+                text = stringResource(R.string.payload),
                 color = colorResource(id = R.color.text_color),
                 style = MaterialTheme.typography.h6,
                 modifier = Modifier
@@ -210,18 +221,20 @@ fun PayloadStatsCard(launch: LaunchItem?) {
                 if (index > 0) {
                     CustomDivider()
                 }
-                CardKeyAndValueComponent(name = "Payload ID", value = payload.payloadId.toString())
-                CardKeyAndValueComponent(name = "Manufacturer", value = payload.manufacturer.toString())
-                CardKeyAndValueComponent(name = "Type", value = payload.payloadType.toString())
-                CardKeyAndValueComponent(name = "Nationality", value = payload.nationality.toString())
-                CardKeyAndValueComponent(name = "Mass", value = "${payload.payloadMassKg} kg")
-                CardKeyAndValueComponent(name = "Orbit", value = payload.orbit.toString())
+                CardKeyAndValueComponent(name = stringResource(R.string.payload_id), value = payload.payloadId.toString())
+                CardKeyAndValueComponent(name = stringResource(R.string.manufacturer), value = payload.manufacturer.toString())
+                CardKeyAndValueComponent(name = stringResource(R.string.payload_type), value = payload.payloadType.toString())
+                CardKeyAndValueComponent(name = stringResource(R.string.nationality), value = payload.nationality.toString())
+                CardKeyAndValueComponent(name = stringResource(R.string.mass),
+                    value = stringResource(R.string.mass_kg, payload.payloadMassKg.toString())
+                )
+                CardKeyAndValueComponent(name = stringResource(R.string.orbit), value = payload.orbit.toString())
                 payload.orbitParams?.let { params ->
                     params.referenceSystem?.let {
-                        CardKeyAndValueComponent(name = "Reference System", value = it)
+                        CardKeyAndValueComponent(name = stringResource(R.string.ref_sys), value = it)
                     }
                     params.regime?.let {
-                        CardKeyAndValueComponent(name = "Regime", value = it)
+                        CardKeyAndValueComponent(name = stringResource(R.string.regine), value = it)
                     }
                 }
                 payloadItems++
@@ -260,7 +273,7 @@ fun MediaCard(launch: LaunchItem?, linkClicked: (String?) -> Unit){
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
                 Text(
-                    text = " VIDEO",
+                    text = stringResource(R.string.video),
                     color = colorResource(id = R.color.text_color),
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
@@ -278,7 +291,7 @@ fun MediaCard(launch: LaunchItem?, linkClicked: (String?) -> Unit){
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
                 Text(
-                    text = " PRESS",
+                    text = stringResource(R.string.press),
                     color = colorResource(id = R.color.text_color),
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
@@ -297,7 +310,7 @@ fun MediaCard(launch: LaunchItem?, linkClicked: (String?) -> Unit){
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
                 Text(
-                    text = " WIKI",
+                    text = stringResource(R.string.wiki),
                     color = colorResource(id = R.color.text_color),
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )

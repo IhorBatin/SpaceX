@@ -12,12 +12,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Singleton
     @Provides
     fun provideApplication(@ApplicationContext app: Context): BaseApplication = app as BaseApplication
-
-    @Singleton
-    @Provides
-    fun providesTestFunction(): String = "Testing Hilt DI !!!"
 }
