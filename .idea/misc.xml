@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_close.xml" value="0.2611111111111111" />
+        <entry key="app/src/main/res/drawable/ic_fail.xml" value="0.2611111111111111" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_newspaper.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_rocket.xml" value="0.13703703703703704" />
+        <entry key="app/src/main/res/drawable/ic_rocket_2.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable/ic_rocket_black.xml" value="0.24351851851851852" />
+        <entry key="app/src/main/res/drawable/ic_rocket_default.xml" value="0.2611111111111111" />
         <entry key="app/src/main/res/drawable/ic_television.xml" value="0.13703703703703704" />
         <entry key="app/src/main/res/drawable/ic_wikipedia.xml" value="0.13703703703703704" />
         <entry key="app/src/main/res/layout-w600dp/activity_main.xml" value="0.1" />

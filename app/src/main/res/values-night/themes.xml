@@ -14,8 +14,6 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <drawable name="rocket_default_image">@drawable/ic_rocket</drawable>
-
     <color name="color_primary">@color/purple_500</color>
     <color name="text_color">@color/white</color>
     <color name="card_background_color">#FF000000</color>

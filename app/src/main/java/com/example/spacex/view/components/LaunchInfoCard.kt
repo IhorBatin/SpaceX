@@ -41,7 +41,7 @@ fun LaunchInfoCard(
             ) {
                 val image = loadImage(
                     url = launch.links?.missionPatchSmall,
-                    defaultImage = R.drawable.rocket_default_image
+                    defaultImage = R.drawable.ic_rocket_default
                 ).value
                 image?.let { img ->
                     Image(
