@@ -41,11 +41,26 @@ fun loadImage(
             .load(url)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    bitmapState.value = resource
+                    when (checkBitmapNeedsResizing(resource)) {
+                        true -> bitmapState.value = resizeBitmap(resource)
+                        false -> bitmapState.value = resource
+                    }
                 }
                 override fun onLoadCleared(placeholder: Drawable?) { }
             })
     }
-
+    
     return bitmapState
+}
+
+private fun checkBitmapNeedsResizing(bitmap: Bitmap) =
+    (bitmap.height > MAX_REC_BTMP_HEIGHT || bitmap.width > MAX_REC_BTMP_WIDTH)
+
+private fun resizeBitmap(bitmap: Bitmap): Bitmap {
+    return Bitmap.createScaledBitmap(
+        bitmap,
+        MAX_REC_BTMP_WIDTH,
+        MAX_REC_BTMP_HEIGHT,
+        false
+    )
 }
